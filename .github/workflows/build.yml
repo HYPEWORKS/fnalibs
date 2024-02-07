@@ -1,5 +1,6 @@
 name: Build FNA Native Libraries
 on:
+  workflow_dispatch:
   schedule:
     # Let's do it every month on the 1st at 10:30 AM CST (aka 15:30 UTC)
     - cron: '30 15 1 * *'
@@ -12,8 +13,6 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-      - name: Setup SDL
-        uses: libsdl-org/setup-sdl@v1
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Ruby
@@ -24,6 +23,10 @@ jobs:
       - name: Checkout libraries
         run: |
           bundle exec ruby checkout.rb
+      - name: Setup SDL
+        uses: libsdl-org/setup-sdl@v1
+        with:
+          version: 2-latest
       - name: Build libraries
         run: |
           bundle exec ruby build.rb
