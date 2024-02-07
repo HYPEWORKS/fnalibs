@@ -1,8 +1,8 @@
 name: Build FNA Native Libraries
 on:
   schedule:
-    # Let's do it every month on the 1st at 10:00 AM CST (aka 15:00 UTC)
-    - cron: '0 15 1 * *'
+    # Let's do it every month on the 1st at 10:30 AM CST (aka 15:30 UTC)
+    - cron: '30 15 1 * *'
 jobs:
   # Build on all platforms (Windows, Linux, macOS)
   build:
@@ -12,6 +12,8 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
+      - name: Setup SDL
+        uses: libsdl-org/setup-sdl@v1
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Ruby
