@@ -17,9 +17,9 @@ def build_fna3d(arch)
   puts "Building FNA3D..."
 
   if ENV['RUNNER_OS'] == "Windows"
-    system 'cmake', '--build', 'release', '--config', 'Release'
+    system 'cmake', '--build', '.', '--config', 'Release'
   elsif ENV['RUNNER_OS'] == "macOS"
-    system 'cmake', '--build', 'release', '--config', 'Release'
+    system 'cmake', '--build', '.', '--config', 'Release'
   else
     Dir.chdir('FNA3D/release') do
       system 'make'
