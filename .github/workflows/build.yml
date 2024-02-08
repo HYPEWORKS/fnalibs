@@ -23,10 +23,11 @@ jobs:
       - name: Checkout libraries
         run: |
           bundle exec ruby checkout.rb
-      - name: Setup SDL
+      - name: Build SDL2
         uses: libsdl-org/setup-sdl@v1
         with:
           version: 2-latest
+          build-type: Release
       - name: Build libraries
         run: |
           bundle exec ruby build.rb
