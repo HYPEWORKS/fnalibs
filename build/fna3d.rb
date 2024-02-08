@@ -3,11 +3,14 @@ def build_fna3d(arch)
 
   Dir.chdir('FNA3D') do
     if ENV['RUNNER_OS'] == "Windows"
-      system 'cmake', '-B', 'release', '-G', 'Visual Studio 17 2022', '.', '-DCMAKE_BUILD_TYPE=Release', "-A #{arch}"
+      puts "Building for Windows (#{arch})..."
+      system 'cmake', '-B', 'release', '-G', 'Visual Studio 17 2022', '.', '-DCMAKE_BUILD_TYPE=Release', "-A #{arch}", '-DCMAKE_POLICY_DEFAULT_CMP0074=NEW'
     elsif ENV['RUNNER_OS'] == "macOS"
-      system 'cmmake', '-B', 'release', '-G', 'Xcode', '.', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"'
+      puts "Building for macOS (x86_64 and arm64)..."
+      system 'cmmake', '-B', 'release', '-G', 'Xcode', '.', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"', '-DCMAKE_POLICY_DEFAULT_CMP0074=NEW'
     else
-      system 'cmake', '-B', 'release', '-G', 'Unix Makefiles', '.', '-DCMAKE_BUILD_TYPE=Release'
+      puts "Building for Linux (#{arch})..."
+      system 'cmake', '-B', 'release', '-G', 'Unix Makefiles', '.', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_POLICY_DEFAULT_CMP0074=NEW'
     end
   end
 
