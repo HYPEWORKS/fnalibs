@@ -15,7 +15,6 @@ This repo distributes the native libraries for FNA:
 The libraries will be built for these platforms/architectures:
 
   * Windows
-    * x86
     * x64
   * Mac OS
     * x64

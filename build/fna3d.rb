@@ -12,6 +12,8 @@ def build_fna3d(arch)
       puts "Configuring for Linux (#{arch})..."
       system 'cmake', '-B', 'release', '-G', 'Unix Makefiles', '.', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_POLICY_DEFAULT_CMP0074=NEW'
     end
+
+    system 'ls', '-la'
   end
 
   puts "Building FNA3D..."
