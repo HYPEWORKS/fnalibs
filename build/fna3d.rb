@@ -16,15 +16,17 @@ def build_fna3d(arch)
 
   puts "Building FNA3D..."
 
-  Dir.chdir('FNA3D/release') do
-    if ENV['RUNNER_OS'] == "Windows"
-      system 'cmake', '--build', '.', '--config', 'Release'
-    elsif ENV['RUNNER_OS'] == "macOS"
-      Dir.chdir('../') do
+  if ENV['RUNNER_OS'] == "macOS" do
+    system 'cmake', '--build', '.', '--config', 'Release'
+  else
+    Dir.chdir('FNA3D/release') do
+      if ENV['RUNNER_OS'] == "Windows"
         system 'cmake', '--build', '.', '--config', 'Release'
+      elsif ENV['RUNNER_OS'] == "macOS"
+
+      else
+        system 'make'
       end
-    else
-      system 'make'
     end
   end
 end
