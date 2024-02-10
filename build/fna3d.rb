@@ -16,7 +16,7 @@ def build_fna3d(arch)
 
   puts "Building FNA3D..."
 
-  if ENV['RUNNER_OS'] == "macOS" do
+  if ENV['RUNNER_OS'] == "macOS"
     system 'cmake', '--build', '.', '--config', 'Release'
   else
     Dir.chdir('FNA3D/release') do
