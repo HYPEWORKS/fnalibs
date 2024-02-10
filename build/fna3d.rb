@@ -12,8 +12,6 @@ def build_fna3d(arch)
       puts "Configuring for Linux (#{arch})..."
       system 'cmake', '-B', 'release', '-G', 'Unix Makefiles', '.', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_POLICY_DEFAULT_CMP0074=NEW'
     end
-
-    system 'ls', '-la'
   end
 
   puts "Building FNA3D..."
@@ -22,7 +20,9 @@ def build_fna3d(arch)
     if ENV['RUNNER_OS'] == "Windows"
       system 'cmake', '--build', '.', '--config', 'Release'
     elsif ENV['RUNNER_OS'] == "macOS"
-      system 'cmake', '--build', '.', '--config', 'Release'
+      Dir.chdir('../') do
+        system 'cmake', '--build', '.', '--config', 'Release'
+      end
     else
       system 'make'
     end
